@@ -1,0 +1,13 @@
+const light = new THREE.DirectionalLight(0xffffff, 1);
+light.position.set(-100, 300, -100);
+light.castShadow = true;
+light.shadow.camera.left = -2000;
+light.shadow.camera.right = 2000;
+light.shadow.camera.top = 2000;
+light.shadow.camera.bottom = -2000;
+light.shadow.camera.far = 2000;
+light.shadow.mapSize.width = 2048;
+light.shadow.mapSize.height = 2048;
+scene.add(light);
+const ambient = new THREE.AmbientLight(0x808080);
+scene.add(ambient);

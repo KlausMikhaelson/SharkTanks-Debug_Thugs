@@ -51,11 +51,6 @@ class GameObject{
     }
 }
 
-let players = {}
-
-io.on("connection", (socket) => {
-    console.log(`new player with id ${socket.id} just joined`)
-})
 
 app.use(express.static("public"));
 
