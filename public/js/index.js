@@ -15,8 +15,10 @@ camera.lookAt(floorMesh.position);
 const textureLoader = new THREE.TextureLoader();
 const playerTexture = textureLoader.load("../assets/tank2.png")
 
+const wallTexture = textureLoader.load("../assets/walls.jpg")
+
 const bulletMaterial = new THREE.MeshLambertMaterial({ color: 0x808080 });
-const wallMaterial = new THREE.MeshLambertMaterial({ color: 'firebrick' });
+const wallMaterial = new THREE.MeshLambertMaterial({ map: wallTexture });
 const playerMaterial = new THREE.MeshLambertMaterial({map: playerTexture});
 const textMaterial = new THREE.MeshBasicMaterial({ color: 0xf39800, side: THREE.DoubleSide });
 const nicknameMaterial = new THREE.MeshBasicMaterial({ color: 'black', side: THREE.DoubleSide });
@@ -187,7 +189,7 @@ socket.on('state', (players, bullets, walls) => {
     Object.values(walls).forEach((wall) => {
         let mesh = Meshes[wall.id];
         if (!mesh) {
-            mesh = new THREE.Mesh(new THREE.BoxGeometry(wall.width, 100, 1000), wallMaterial);
+            mesh = new THREE.Mesh(new THREE.BoxGeometry(wall.width, 200, 1000), wallMaterial);
             mesh.castShadow = true;
             Meshes.push(mesh);
             Meshes[wall.id] = mesh;
