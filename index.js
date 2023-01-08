@@ -148,7 +148,7 @@ walls[wall1.id] = wall1;
 
 const wall2 = new Wall({
     x: 1000,
-    y: 10,
+    y: 100,
     width: 200,
     height: 1000,
 
@@ -156,12 +156,29 @@ const wall2 = new Wall({
 walls[wall2.id] = wall2;
 
 const wall3 = new Wall({
-    x: 3000,
-    y: 10,
+    x: 2000,
+    y: 1000,
     width: 200,
     height: 1000,
 })
 walls[wall3.id] = wall3;
+
+const wall4 = new Wall({
+    x: -1000,
+    y: -1000,
+    width: 200,
+    height: 1000,
+})
+walls[wall4.id] = wall4;
+
+const wall5 = new Wall({
+    x: -1500,
+    y: 700,
+    width: 200,
+    height: 1000,
+})
+walls[wall5.id] = wall5;
+
 
 
 const bot = new BotPlayer({ nickname: 'bot' });
