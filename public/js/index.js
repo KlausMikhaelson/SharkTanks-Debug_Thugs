@@ -109,10 +109,10 @@ socket.on('state', (players, bullets, walls) => {
             console.log('create body mesh');
             const playerModel = new GLTFLoader;
             playerModel.load(
-                "../models/tank.glb",
+                "../models/tank2.glb",
                 function (gltf) {
                     console.log(gltf.scene);
-                    gltf.scene.scale.set(20, 20, 20);
+                    gltf.scene.scale.set(30, 30, 30);
                     playerMesh.add(gltf.scene)
                 },
                 undefined,
