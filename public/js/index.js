@@ -18,35 +18,22 @@ const textMaterial = new THREE.MeshBasicMaterial({ color: 0xf39800, side: THREE.
 const nicknameMaterial = new THREE.MeshBasicMaterial({ color: 'black', side: THREE.DoubleSide });
 
 
-
-// const playerModel = new GLTFLoader;
-//     playerModel.load('../models/tank.glb',
-//         function ( gltf ) {
-
-//             scene.add( gltf.scene );
-
-//             gltf.animations; // Array<THREE.AnimationClip>
-//             gltf.scene; // THREE.Group
-//             gltf.scenes; // Array<THREE.Group>
-//             gltf.cameras; // Array<THREE.Camera>
-//             gltf.asset; // Object
-
-//         },
-//         function ( xhr ) {
-//             console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
-
-//         },
-//         function ( error ) {
-//             console.log( 'An error happened' );
-//         }
-//     );
-
-
 const loader = new THREE.FontLoader();
 let font;
 loader.load('fonts/helvetiker_bold.typeface.json', function (font_) {
     font = font_;
 });
+
+const loader_map = new THREE.CubeTextureLoader();
+const texture = loader_map.load([
+    '../assets/nx.png',
+    '../assets/px.png',
+    '../assets/py1.png',
+    '../assets/ny.png',
+    '../assets/nz.png',
+    '../assets/pz.png',
+]);
+scene.background = texture;
 
 function animate() {
     requestAnimationFrame(animate)
