@@ -56,9 +56,13 @@ function animate() {
 animate();
 
 function gameStart() {
-    const nickname = $("#nickname").val();
-    socket.emit('game-start', { nickname: nickname });
-    $("#start-screen").hide();
+    const nickname = $("#nickname").val().trim();
+    if(nickname === "") {
+        alert("Please enter your name first")
+    } else {
+        socket.emit('game-start', { nickname: nickname });
+        $("#start-screen").hide();
+    }
 }
 $("#start-button").on('click', gameStart);
 
