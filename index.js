@@ -210,7 +210,7 @@ setInterval(() => {
 
 app.use(express.static("public"));
 
-const port = 3001;
-server.listen(port, () => {
-  console.log(`Starting server on port ${port}`);
+const PORT = process.env.PORT || 3001;
+server.listen(PORT, () => {
+  console.log(`Starting server on port ${PORT}`);
 });
