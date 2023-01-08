@@ -10,11 +10,41 @@ renderer.shadowMap.enabled = true;
 camera.position.set(1000, 300, 1000);
 camera.lookAt(floorMesh.position);
 
+// Materials
 const bulletMaterial = new THREE.MeshLambertMaterial( { color: 0x808080 } );
 const wallMaterial = new THREE.MeshLambertMaterial( { color: 'firebrick' } );
 const playerMaterial = new THREE.MeshLambertMaterial({});
 const textMaterial = new THREE.MeshBasicMaterial({ color: 0xf39800, side: THREE.DoubleSide });
-const nameMaterial = new THREE.MeshBasicMaterial({ color: 'black', side: THREE.DoubleSide });
+const nicknameMaterial = new THREE.MeshBasicMaterial({ color: 'black', side: THREE.DoubleSide });
+
+// const playerModel = new GLTFLoader;
+//     playerModel.load('../models/tank.glb',
+//         function ( gltf ) {
+    
+//             scene.add( gltf.scene );
+    
+//             gltf.animations; // Array<THREE.AnimationClip>
+//             gltf.scene; // THREE.Group
+//             gltf.scenes; // Array<THREE.Group>
+//             gltf.cameras; // Array<THREE.Camera>
+//             gltf.asset; // Object
+    
+//         },
+//         function ( xhr ) {
+//             console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+    
+//         },
+//         function ( error ) {
+//             console.log( 'An error happened' );
+//         }
+//     );
+
+
+const loader = new THREE.FontLoader();
+let font;
+    loader.load('fonts/helvetiker_bold.typeface.json', function(font_) {
+    font = font_;
+});
 
 function animate() {
     requestAnimationFrame(animate)
@@ -24,8 +54,8 @@ function animate() {
 animate();
 
 function gameStart() {
-    const name = $("#player_name").val();
-    socket.emit('game-start', {name: name});
+    const nickname = $("#nickname").val();
+    socket.emit('game-start', {nickname: nickname});
     $("#start-screen").hide();
 }
 $("#start-button").on('click', gameStart);
@@ -54,6 +84,7 @@ $(document).on('keydown keyup', (event) => {
 })
 
 
+
 const Meshes = [];
 socket.on('state', (players, bullets, walls) => {
     Object.values(Meshes).forEach((mesh) => {mesh.used = false;});
@@ -80,15 +111,15 @@ socket.on('state', (players, bullets, walls) => {
     		playerMesh.add(mesh);
         }
 
-
-            if(!playerMesh.getObjectByName('name')){
+        if(font){
+            if(!playerMesh.getObjectByName('nickname')){
                 console.log('create name mesh');
                 var mesh = new THREE.Mesh(
-                    new THREE.TextGeometry(player.name,
-                        {size: 10, height: 1}),
-                        nameMaterial,
+                    new THREE.TextGeometry(player.nickname, 
+                        {font:font, size: 10, height: 1}),
+                        nicknameMaterial,
                 );
-                mesh.name = 'name';
+                mesh.name = 'nickname';
                 playerMesh.add(mesh);
 
                 mesh.position.set(0, 70, 0);
@@ -106,7 +137,7 @@ socket.on('state', (players, bullets, walls) => {
                     console.log('create health mesh');
                     mesh = new THREE.Mesh(
                         new THREE.TextGeometry('*'.repeat(player.health),
-                            {size: 10, height: 1}),
+                            {font:font, size: 10, height: 1}),
                             textMaterial,
                     );
                     mesh.name = 'health';
@@ -116,6 +147,7 @@ socket.on('state', (players, bullets, walls) => {
                 mesh.position.set(0, 50, 0);
                 mesh.rotation.y = Math.PI/2;
             }
+        }
         
         
         if(player.socketId === socket.id){
@@ -157,6 +189,7 @@ socket.on('state', (players, bullets, walls) => {
         mesh.used = true;
         mesh.position.set(wall.x + wall.width/2, 50, wall.y + wall.height/2);
     });
+    
     // Clear unused Meshes
     Object.keys(Meshes).forEach((key) => {
         const mesh = Meshes[key];
