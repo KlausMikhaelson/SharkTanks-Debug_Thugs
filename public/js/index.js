@@ -27,7 +27,7 @@ const wallTexture = textureLoader.load("../assets/walls.jpg")
 const bulletMaterial = new THREE.MeshLambertMaterial({ color: 0x404040 });
 const wallMaterial = new THREE.MeshLambertMaterial({ map: wallTexture });
 const playerMaterial = new THREE.MeshLambertMaterial({map: playerTexture});
-const textMaterial = new THREE.MeshBasicMaterial({ color: 0xf39800, side: THREE.DoubleSide });
+const textMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000, side: THREE.DoubleSide });
 const nicknameMaterial = new THREE.MeshBasicMaterial({ color: 'black', side: THREE.DoubleSide });
 
 
@@ -153,8 +153,8 @@ socket.on('state', (players, bullets, walls) => {
                 if (!mesh) {
                     console.log('create health mesh');
                     mesh = new THREE.Mesh(
-                        new THREE.TextGeometry('*'.repeat(player.health),
-                            { font: font, size: 10, height: 1 }),
+                        new THREE.TextGeometry('|'.repeat(player.health),
+                            { font: font, size: 10, height: 2 }),
                         textMaterial,
                     );
                     mesh.name = 'health';

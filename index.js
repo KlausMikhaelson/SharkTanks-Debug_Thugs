@@ -9,7 +9,6 @@ const server = http.Server(app);
 const io = socketIO(server);
 
 
-
 const ground_width = 2500, ground_height = 2500;
 class GameObject {
     constructor(obj = {}) {
@@ -51,6 +50,7 @@ class GameObject {
         return { id: this.id, x: this.x, y: this.y, width: this.width, height: this.height, angle: this.angle };
     }
 }
+
 
 
 class Player extends GameObject {
