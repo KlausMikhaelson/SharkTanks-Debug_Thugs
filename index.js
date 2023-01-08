@@ -10,7 +10,7 @@ const io = socketIO(server);
 
 
 const ground_width = 5000, ground_height = 5000;
-class GameObject{
+class Game{
     constructor(obj={}){
         this.id = Math.floor(Math.random()*1000000000);
         this.x = obj.x;
@@ -98,6 +98,20 @@ class Player extends Game{
         return Object.assign(super.toJSON(), {health: this.health, maxHealth: this.maxHealth, socketId: this.socketId, point: this.point, name: this.name}); 
     }
 }
+
+class Bullet extends Game{
+    constructor(obj) {
+        super(obj);
+        this.width = 15;
+        this.height = 15;
+        this.player = obj.player;
+    }
+    remove() {
+        delete this.player.bullets[this.id];
+        delete bullets[this.id];
+    }
+}
+
 
 app.use(express.static("public"));
 
