@@ -163,6 +163,42 @@ io.on("connection", (socket) => {
         });
         players[player.id] = player;
     });
+    socket.on("movement", (movement) => {
+        if(!player || player.health === 0) {
+            return;
+        }
+        player.movement = movement;
+    });
+    socket.on('shoot', function() {
+        if(!player || player.health === 0) {
+            return;
+        }
+    });
+    socket.on('disconnect', () => {
+        if(!player) {
+            return;
+        }
+        delete players[player.id];
+        player = null;
+    });
+});
+
+setInterval(() => {
+    Object.values(players).forEach((player) => {
+        const movement = player.movement;
+        if(movement.forward) {
+            player.move(30);
+        }
+        if(movement.back) {
+            player.move(-30);
+        }
+        if(movement.left) {
+            player.angle -= 0.1;
+        }
+        if(movement.right) {
+            player.angle += 0.1;
+        }
+    });
 })
 
 app.use(express.static("public"));
