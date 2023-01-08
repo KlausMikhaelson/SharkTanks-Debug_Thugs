@@ -90,6 +90,13 @@ class Player extends Game{
             this.remove();
         }
     }
+    remove() {
+        delete players[this.id];
+        io.to(this.socketId).emit('dead');
+    }
+    toJSON() {
+        return Object.assign(super.toJSON(), {health: this.health, maxHealth: this.maxHealth, socketId: this.socketId, point: this.point, name: this.name}); 
+    }
 }
 
 app.use(express.static("public"));
