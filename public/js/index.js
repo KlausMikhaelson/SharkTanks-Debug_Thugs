@@ -112,7 +112,7 @@ socket.on('state', (players, bullets, walls) => {
                 "../models/tank.glb",
                 function (gltf) {
                     console.log(gltf.scene);
-                    gltf.scene.scale.set(10, 10, 10);
+                    gltf.scene.scale.set(20, 20, 20);
                     playerMesh.add(gltf.scene)
                 },
                 undefined,
