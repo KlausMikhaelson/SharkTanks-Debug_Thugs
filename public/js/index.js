@@ -243,4 +243,5 @@ socket.on('state', (players, bullets, walls) => {
 
 socket.on('dead', () => {
     $("#start-screen").show();
+    $("#canvas-3d").hide();
 });
