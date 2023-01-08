@@ -133,6 +133,38 @@ class bot extends Player{
     }
 }
 
+class Wall extends Game{
+
+}
+
+let players = {}
+let bullets = {}
+let walls = {}
+
+for(let i=0; i<10; i++){
+    const wall = new Wall({
+            x: Math.random() * 2000,
+            y: Math.random() * 2000,
+            width: 200,
+            height: 1000,
+    });
+    walls[wall.id] = wall;
+}
+
+const Bot = new bot({name: 'Karthick'});
+players[Bot.id] = Bot;
+
+io.on("connection", (socket) => {
+    let player = null;
+    socket.on('game-start', (config) => {
+        player = new Player({
+            socketId: socket.id,
+            name: config.name,
+        });
+        players[player.id] = player;
+    });
+})
+
 app.use(express.static("public"));
 
 const port = 3001;
