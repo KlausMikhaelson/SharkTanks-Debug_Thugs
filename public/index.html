@@ -1,23 +1,48 @@
 <html>
-  <head>
-    <title>BattleGround Warriors</title>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="js/libs/three.min.js"></script>
-  </head>
-  <style>
-    * {
-      margin: 0px;
-      padding: 0px;
-    }
-  </style>
-        <div id="start-screen">
-                <input type="text" name="nickname" id="nickname" placeholder="Your nickname" autofocus><br/><br/>
-                <button style="font-size: xx-large;" id="start-button">Start</button>
+<head>
+  <title>BattleGround Warriors</title>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="js/libs/three.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<style>
+  * {
+    margin: 0px;
+    padding: 0px;
+  }
+</style>
+<div style="overflow: hidden; position:relative;">
+  <div id="start-screen" style="background:url(https://www.warhistoryonline.com/wp-content/uploads/sites/64/2018/08/kursk_2.jpg) no-repeat;
+  background-size: cover; height:100%;">
+    <div id="dedrio">
+
+      <div id="sector">
+        <h1 id="budwiser">SharkTanks</h1>
+
+
+        <p class="name">
+          <input name="nickname" type="text" class="validate[required,custom[onlyLetter],length[0,100]] feedback-input"
+            placeholder="Your Username" id="nickname" />
+        </p>
+
+        <div class="submit">
+          <input type="submit" value="Let's Go!" id="start-button" />
+          <div class="ease">
+          </div>
         </div>
-        <canvas id="canvas-3d" width="1000" height="1000" style="position: absolute; width: 100%; height: 100vh; z-index:1;"></canvas>
-  </body>
-  <script src="js/index.js" type="module"></script>
-  <script src="js/map.js"></script>
-  <script src="js/lights.js"></script>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+  <canvas id="canvas-3d" width="1000" height="1000"
+    style="position: absolute; width: 100%; height: 100vh; z-index:0;"></canvas>
+
+</body>
+<script src="js/index.js" type="module"></script>
+<script src="js/map.js"></script>
+<script src="js/lights.js"></script>
+
 </html>
