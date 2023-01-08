@@ -3,7 +3,7 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.121.1/build/three.m
 import { GLTFLoader } from "https://cdn.jsdelivr.net/npm/three@0.121.1/examples/jsm/loaders/GLTFLoader.js";
 const canvas3d = $('#canvas-3d')[0];
 
-const renderer = new THREE.WebGLRenderer({canvas: canvas3d, antialias: true});
+const renderer = new THREE.WebGLRenderer({ canvas: canvas3d, antialias: true });
 renderer.setClearColor('skyblue');
 renderer.shadowMap.enabled = true;
 
@@ -11,28 +11,30 @@ camera.position.set(1000, 300, 1000);
 camera.lookAt(floorMesh.position);
 
 // Materials
-const bulletMaterial = new THREE.MeshLambertMaterial( { color: 0x808080 } );
-const wallMaterial = new THREE.MeshLambertMaterial( { color: 'firebrick' } );
+const bulletMaterial = new THREE.MeshLambertMaterial({ color: 0x808080 });
+const wallMaterial = new THREE.MeshLambertMaterial({ color: 'firebrick' });
 const playerMaterial = new THREE.MeshLambertMaterial({});
 const textMaterial = new THREE.MeshBasicMaterial({ color: 0xf39800, side: THREE.DoubleSide });
 const nicknameMaterial = new THREE.MeshBasicMaterial({ color: 'black', side: THREE.DoubleSide });
 
+
+
 // const playerModel = new GLTFLoader;
 //     playerModel.load('../models/tank.glb',
 //         function ( gltf ) {
-    
+
 //             scene.add( gltf.scene );
-    
+
 //             gltf.animations; // Array<THREE.AnimationClip>
 //             gltf.scene; // THREE.Group
 //             gltf.scenes; // Array<THREE.Group>
 //             gltf.cameras; // Array<THREE.Camera>
 //             gltf.asset; // Object
-    
+
 //         },
 //         function ( xhr ) {
 //             console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
-    
+
 //         },
 //         function ( error ) {
 //             console.log( 'An error happened' );
@@ -42,7 +44,7 @@ const nicknameMaterial = new THREE.MeshBasicMaterial({ color: 'black', side: THR
 
 const loader = new THREE.FontLoader();
 let font;
-    loader.load('fonts/helvetiker_bold.typeface.json', function(font_) {
+loader.load('fonts/helvetiker_bold.typeface.json', function (font_) {
     font = font_;
 });
 
@@ -55,7 +57,7 @@ animate();
 
 function gameStart() {
     const nickname = $("#nickname").val();
-    socket.emit('game-start', {nickname: nickname});
+    socket.emit('game-start', { nickname: nickname });
     $("#start-screen").hide();
 }
 $("#start-button").on('click', gameStart);
@@ -70,15 +72,15 @@ $(document).on('keydown keyup', (event) => {
         'ArrowRight': 'right',
     };
     const command = KeyToCommand[event.key];
-    if(command) {
-        if(event.type === "keydown") {
+    if (command) {
+        if (event.type === "keydown") {
             movement[command] = true;
         } else {
             movement[command] = false;
         }
         socket.emit('movement', movement);
     }
-    if(event.key === ' ' && event.type === "keydown") {
+    if (event.key === ' ' && event.type === "keydown") {
         socket.emit('shoot');
     }
 })
@@ -87,117 +89,132 @@ $(document).on('keydown keyup', (event) => {
 
 const Meshes = [];
 socket.on('state', (players, bullets, walls) => {
-    Object.values(Meshes).forEach((mesh) => {mesh.used = false;});
-    
+    Object.values(Meshes).forEach((mesh) => { mesh.used = false; });
+
     // Players
     Object.values(players).forEach((player) => {
         let playerMesh = Meshes[player.id];
-        if(!playerMesh){
+        if (!playerMesh) {
             console.log('create player mesh');
             playerMesh = new THREE.Group();
-    		playerMesh.castShadow = true;
-    		Meshes[player.id] = playerMesh;
-    		scene.add(playerMesh);
+            playerMesh.castShadow = true;
+            Meshes[player.id] = playerMesh;
+            scene.add(playerMesh);
         }
         playerMesh.used = true;
-        playerMesh.position.set(player.x + player.width/2, player.width/2, player.y + player.height/2);
-		playerMesh.rotation.y = - player.angle;
-        
-        if(!playerMesh.getObjectByName('body')){
+        playerMesh.position.set(player.x + player.width / 2, player.width / 2, player.y + player.height / 2);
+        playerMesh.rotation.y = - player.angle;
+
+        if (!playerMesh.getObjectByName('body')) {
             console.log('create body mesh');
-    		mesh = new THREE.Mesh(new THREE.BoxGeometry(player.width, player.width, player.height), playerMaterial);
-    		mesh.castShadow = true;
-    		mesh.name = 'body';
-    		playerMesh.add(mesh);
+            const playerModel = new GLTFLoader;
+            playerModel.load(
+                "../models/tank.glb",
+                function (gltf) {
+                    console.log(gltf.scene);
+                    gltf.scene.scale.set(10, 10, 10);
+                    playerMesh.add(gltf.scene)
+                },
+                undefined,
+                function (error) {
+                    console.error(error);
+                },
+                );
+            // mesh = new THREE.Mesh(new THREE.playerModel(player.width, player.width, player.height), playerMaterial);
+            // model = new THREE.playerModel();
+            // mesh = new THREE.Mesh(new this.model)
+            // mesh.castShadow = true;
+            // mesh.name = 'body';
+            // playerMesh.add(mesh);
         }
 
-        if(font){
-            if(!playerMesh.getObjectByName('nickname')){
+        if (font) {
+            if (!playerMesh.getObjectByName('nickname')) {
                 console.log('create name mesh');
                 var mesh = new THREE.Mesh(
-                    new THREE.TextGeometry(player.nickname, 
-                        {font:font, size: 10, height: 1}),
-                        nicknameMaterial,
+                    new THREE.TextGeometry(player.nickname,
+                        { font: font, size: 10, height: 1 }),
+                    nicknameMaterial,
                 );
                 mesh.name = 'nickname';
                 playerMesh.add(mesh);
 
                 mesh.position.set(0, 70, 0);
-                mesh.rotation.y = Math.PI/2;
+                mesh.rotation.y = Math.PI / 2;
             }
             {
                 let mesh = playerMesh.getObjectByName('health');
 
-                if(mesh && mesh.health !== player.health){
+                if (mesh && mesh.health !== player.health) {
                     playerMesh.remove(mesh);
                     mesh.geometry.dispose();
                     mesh = null;
                 }
-                if(!mesh){
+                if (!mesh) {
                     console.log('create health mesh');
                     mesh = new THREE.Mesh(
                         new THREE.TextGeometry('*'.repeat(player.health),
-                            {font:font, size: 10, height: 1}),
-                            textMaterial,
+                            { font: font, size: 10, height: 1 }),
+                        textMaterial,
                     );
                     mesh.name = 'health';
                     mesh.health = player.health;
                     playerMesh.add(mesh);
                 }
                 mesh.position.set(0, 50, 0);
-                mesh.rotation.y = Math.PI/2;
+                mesh.rotation.y = Math.PI / 2;
             }
         }
-        
-        
-        if(player.socketId === socket.id){
+
+
+        if (player.socketId === socket.id) {
             // camera position
-			camera.position.set(
-			    player.x + player.width/2 - 150 * Math.cos(player.angle),
-			    200,
-                player.y + player.height/2 - 150 * Math.sin(player.angle)
+            camera.position.set(
+                player.x + player.width / 2 - 150 * Math.cos(player.angle),
+                200,
+                player.y + player.height / 2 - 150 * Math.sin(player.angle)
             );
-			camera.rotation.set(0, - player.angle - Math.PI/2, 0);
-			
+            camera.rotation.set(0, - player.angle - Math.PI / 2, 0);
+
         }
     });
-    
+
     // Bullets
     Object.values(bullets).forEach((bullet) => {
         let mesh = Meshes[bullet.id];
-        if(!mesh){
-            mesh = new THREE.Mesh(new THREE.SphereGeometry(10,10), bulletMaterial);
-		    mesh.castShadow = true;
-    		Meshes[bullet.id] = mesh;
-		    // Meshes.push(mesh);
-		    scene.add(mesh);
+        if (!mesh) {
+            mesh = new THREE.Mesh(new THREE.SphereGeometry(10, 10), bulletMaterial);
+            mesh.castShadow = true;
+            Meshes[bullet.id] = mesh;
+            // Meshes.push(mesh);
+            scene.add(mesh);
         }
         mesh.used = true;
-        mesh.position.set(bullet.x + bullet.width/2, 80, bullet.y + bullet.height/2);
+        mesh.position.set(bullet.x + bullet.width / 2, 80, bullet.y + bullet.height / 2);
     });
-    
+
     // Walls
     Object.values(walls).forEach((wall) => {
         let mesh = Meshes[wall.id];
-        if(!mesh){
-    		mesh = new THREE.Mesh(new THREE.BoxGeometry(wall.width, 100, 1000), wallMaterial);
-    		mesh.castShadow = true;
-    		Meshes.push(mesh);
-    		Meshes[wall.id] = mesh;
-    		scene.add(mesh);
+        if (!mesh) {
+            mesh = new THREE.Mesh(new THREE.BoxGeometry(wall.width, 100, 1000), wallMaterial);
+            mesh.castShadow = true;
+            Meshes.push(mesh);
+            Meshes[wall.id] = mesh;
+            scene.add(mesh);
         }
         mesh.used = true;
-        mesh.position.set(wall.x + wall.width/2, 50, wall.y + wall.height/2);
+        mesh.position.set(wall.x + wall.width / 2, 50, wall.y + wall.height / 2);
     });
-    
+
     // Clear unused Meshes
     Object.keys(Meshes).forEach((key) => {
         const mesh = Meshes[key];
-        if(!mesh.used){
+        if (!mesh.used) {
             console.log('removing mesh', key);
             scene.remove(mesh);
             mesh.traverse((mesh2) => {
-                if(mesh2.geometry){
+                if (mesh2.geometry) {
                     mesh2.geometry.dispose();
                 }
             });
