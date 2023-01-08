@@ -11,9 +11,13 @@ camera.position.set(1000, 300, 1000);
 camera.lookAt(floorMesh.position);
 
 // Materials
+
+const textureLoader = new THREE.TextureLoader();
+const playerTexture = textureLoader.load("../assets/tank2.png")
+
 const bulletMaterial = new THREE.MeshLambertMaterial({ color: 0x808080 });
 const wallMaterial = new THREE.MeshLambertMaterial({ color: 'firebrick' });
-const playerMaterial = new THREE.MeshLambertMaterial({});
+const playerMaterial = new THREE.MeshLambertMaterial({map: playerTexture});
 const textMaterial = new THREE.MeshBasicMaterial({ color: 0xf39800, side: THREE.DoubleSide });
 const nicknameMaterial = new THREE.MeshBasicMaterial({ color: 'black', side: THREE.DoubleSide });
 
