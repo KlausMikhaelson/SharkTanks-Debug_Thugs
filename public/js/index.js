@@ -9,15 +9,22 @@ renderer.shadowMap.enabled = true;
 
 camera.position.set(1000, 300, 1000);
 camera.lookAt(floorMesh.position);
+const listener = new THREE.AudioListener();
+camera.add(listener);
+const audioLoader = new THREE.AudioLoader();
 
-// Materials
+const mySound = new THREE.Audio(listener);
+audioLoader.load("../assets/firing2.mp3", function(buffer) {
+    mySound.setBuffer(buffer)
+    mySound.setVolume(0.5)
+})
 
 const textureLoader = new THREE.TextureLoader();
 const playerTexture = textureLoader.load("../assets/tank2.png")
 
 const wallTexture = textureLoader.load("../assets/walls.jpg")
 
-const bulletMaterial = new THREE.MeshLambertMaterial({ color: 0x808080 });
+const bulletMaterial = new THREE.MeshLambertMaterial({ color: 0x404040 });
 const wallMaterial = new THREE.MeshLambertMaterial({ map: wallTexture });
 const playerMaterial = new THREE.MeshLambertMaterial({map: playerTexture});
 const textMaterial = new THREE.MeshBasicMaterial({ color: 0xf39800, side: THREE.DoubleSide });
@@ -75,6 +82,7 @@ $(document).on('keydown keyup', (event) => {
     }
     if (event.key === ' ' && event.type === "keydown") {
         socket.emit('shoot');
+        mySound.play();
     }
 })
 
