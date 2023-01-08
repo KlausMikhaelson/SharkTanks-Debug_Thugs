@@ -24,7 +24,9 @@ const playerTexture = textureLoader.load("../assets/tank2.png")
 
 const wallTexture = textureLoader.load("../assets/walls.jpg")
 
-const bulletMaterial = new THREE.MeshLambertMaterial({ color: 0x404040 });
+const bulletTexture = textureLoader.load("../assets/bullets.jpg")
+
+const bulletMaterial = new THREE.MeshLambertMaterial({ map: bulletTexture });
 const wallMaterial = new THREE.MeshLambertMaterial({ map: wallTexture });
 const playerMaterial = new THREE.MeshLambertMaterial({map: playerTexture});
 const textMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000, side: THREE.DoubleSide });
