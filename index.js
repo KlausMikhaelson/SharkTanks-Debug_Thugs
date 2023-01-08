@@ -79,8 +79,17 @@ class Player extends Game{
             y: this.y + this.height/2,
             angle: this.angle,
             player: this,
-        })
+        });
+        bullet.move(this.width/2);
+        this.bullets[bullet.id] = bullet;
+        bullets[bullet.id] = bullet;
     } 
+    damage() {
+        this.health -= 1;
+        if(this.health === 0) {
+            this.remove();
+        }
+    }
 }
 
 app.use(express.static("public"));
