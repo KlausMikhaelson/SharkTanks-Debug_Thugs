@@ -26,7 +26,7 @@ const nicknameMaterial = new THREE.MeshBasicMaterial({ color: 'black', side: THR
 
 const loader = new THREE.FontLoader();
 let font;
-loader.load('fonts/helvetiker_bold.typeface.json', function (font_) {
+loader.load('fonts/helvetiker_regular.typeface.json', function (font_) {
     font = font_;
 });
 
