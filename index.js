@@ -9,7 +9,7 @@ const server = http.Server(app);
 const io = socketIO(server);
 
 
-const FIELD_WIDTH = 5000, FIELD_HEIGHT = 5000;
+const ground_width = 5000, ground_height = 5000;
 class GameObject{
     constructor(obj={}){
         this.id = Math.floor(Math.random()*1000000000);
@@ -26,7 +26,7 @@ class GameObject{
         this.y += distance * Math.sin(this.angle);
         
         let collision = false;
-        if(this.x < -5000 || this.x + this.width >= FIELD_WIDTH || this.y < -5000 || this.y + this.height >= FIELD_HEIGHT){
+        if(this.x < -5000 || this.x + this.width >= ground_width || this.y < -5000 || this.y + this.height >= ground_height){
             collision = true;
         }
         if(this.intersectWalls()){
@@ -51,6 +51,37 @@ class GameObject{
     }
 }
 
+class Player extends Game{
+    constructor(obj={}) {
+        super(obj);
+        this.socketId = obj.socketId;
+        this.name = obj.name;
+        this.width = 100;
+        this.height = 100;
+        this.health = this.maxHealth = 10;
+        this.bullets = {};
+        this.point = 0;
+
+        do {
+            this.x = Math.random() * (ground_width - this.width);
+            this.y = Math.random() * (ground_height - this.height);
+            this.angle = Math.random() * 2 * Math.PI;
+
+        } while (this.intersectWalls());
+
+    }
+    shoots() {
+        if(Object.keys(this.bullets).length >= 5) {
+            return console.log("reloading")
+        }
+        const bullet = new Bullet ({
+            x: this.x + this.width/2,
+            y: this.y + this.height/2,
+            angle: this.angle,
+            player: this,
+        })
+    } 
+}
 
 app.use(express.static("public"));
 

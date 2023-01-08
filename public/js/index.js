@@ -14,7 +14,7 @@ const bulletMaterial = new THREE.MeshLambertMaterial( { color: 0x808080 } );
 const wallMaterial = new THREE.MeshLambertMaterial( { color: 'firebrick' } );
 const playerMaterial = new THREE.MeshLambertMaterial({});
 const textMaterial = new THREE.MeshBasicMaterial({ color: 0xf39800, side: THREE.DoubleSide });
-const nicknameMaterial = new THREE.MeshBasicMaterial({ color: 'black', side: THREE.DoubleSide });
+const nameMaterial = new THREE.MeshBasicMaterial({ color: 'black', side: THREE.DoubleSide });
 
 function animate() {
     requestAnimationFrame(animate)
@@ -81,14 +81,14 @@ socket.on('state', (players, bullets, walls) => {
         }
 
 
-            if(!playerMesh.getObjectByName('nickname')){
-                console.log('create nickname mesh');
+            if(!playerMesh.getObjectByName('name')){
+                console.log('create name mesh');
                 var mesh = new THREE.Mesh(
-                    new THREE.TextGeometry(player.nickname,
+                    new THREE.TextGeometry(player.name,
                         {size: 10, height: 1}),
-                        nicknameMaterial,
+                        nameMaterial,
                 );
-                mesh.name = 'nickname';
+                mesh.name = 'name';
                 playerMesh.add(mesh);
 
                 mesh.position.set(0, 70, 0);
