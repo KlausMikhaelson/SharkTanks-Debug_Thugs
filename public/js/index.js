@@ -20,7 +20,12 @@ audioLoader.load("../assets/firing2.mp3", function(buffer) {
 })
 
 const textureLoader = new THREE.TextureLoader();
-const playerTexture = textureLoader.load("../assets/tank2.png")
+const playerTexture2 = textureLoader.load("../assets/tank2.png")
+const playerTexture = textureLoader.load("../assets/front.jpg")
+const playerTexture1 = textureLoader.load("../assets/bottom.jpg")
+const playerTexture3 = textureLoader.load("../assets/tires.png")
+const playerTexture4 = textureLoader.load("../assets/tires2.png")
+const playerTexture5 = textureLoader.load("../assets/back.jpg")
 
 const wallTexture = textureLoader.load("../assets/walls.jpg")
 
@@ -28,7 +33,14 @@ const bulletTexture = textureLoader.load("../assets/bullets.jpg")
 
 const bulletMaterial = new THREE.MeshLambertMaterial({ map: bulletTexture });
 const wallMaterial = new THREE.MeshLambertMaterial({ map: wallTexture });
-const playerMaterial = new THREE.MeshLambertMaterial({map: playerTexture});
+const playerMaterial = [
+    new THREE.MeshLambertMaterial({map: playerTexture1, color: 0x404040}),
+    new THREE.MeshLambertMaterial({map: playerTexture5, color: 0x404040}),
+    new THREE.MeshLambertMaterial({map: playerTexture2}),
+    new THREE.MeshLambertMaterial({map: playerTexture, color: 0x404040}),
+    new THREE.MeshLambertMaterial({map: playerTexture3, color: 0x404040}),
+    new THREE.MeshLambertMaterial({map: playerTexture4, color: 0x404040}),
+]
 const textMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000, side: THREE.DoubleSide });
 const nicknameMaterial = new THREE.MeshBasicMaterial({ color: 'black', side: THREE.DoubleSide });
 
@@ -137,7 +149,6 @@ socket.on('state', (players, bullets, walls) => {
 
         if (font) {
             if (!playerMesh.getObjectByName('nickname')) {
-                console.log('create name mesh');
                 var mesh = new THREE.Mesh(
                     new THREE.TextGeometry(player.nickname,
                         { font: font, size: 10, height: 1 }),
