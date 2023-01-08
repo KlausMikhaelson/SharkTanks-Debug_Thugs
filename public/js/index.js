@@ -1,7 +1,6 @@
 const socket = io();
 import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.121.1/build/three.module.js";
 import { GLTFLoader } from "https://cdn.jsdelivr.net/npm/three@0.121.1/examples/jsm/loaders/GLTFLoader.js";
-import { reverseString } from "./algos/reverseStr.js"
 const canvas3d = $('#canvas-3d')[0];
 
 const renderer = new THREE.WebGLRenderer({canvas: canvas3d, antialias: true});
