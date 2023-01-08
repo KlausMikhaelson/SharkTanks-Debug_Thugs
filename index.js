@@ -70,7 +70,7 @@ class Player extends Game{
         } while (this.intersectWalls());
 
     }
-    shoots() {
+    shoot() {
         if(Object.keys(this.bullets).length >= 5) {
             return console.log("reloading")
         }
@@ -112,6 +112,26 @@ class Bullet extends Game{
     }
 }
 
+class bot extends Player{
+    constructor(obj){
+        super(obj);
+        this.time = setInterval(() => {
+            if(! this.move(4)) {
+                this.angle = Math.random() * Math.PI * 2;
+            } else if(Math.random() < 0.03) {
+                this.shoot()
+            }
+        }, 30);
+    }
+    remove() {
+        super.remove();
+        clearInterval(this.time);
+        setTimeout(() => {
+            const Bot = new bot({name: this.name});
+            players[Bot.id] = Bot;
+        }, 3000);
+    }
+}
 
 app.use(express.static("public"));
 
