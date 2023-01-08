@@ -94,25 +94,24 @@ socket.on('state', (players, bullets, walls) => {
 
         if (!playerMesh.getObjectByName('body')) {
             console.log('create body mesh');
-            const playerModel = new GLTFLoader;
-            playerModel.load(
-                "../models/tank2.glb",
-                function (gltf) {
-                    console.log(gltf.scene);
-                    gltf.scene.scale.set(30, 30, 30);
-                    playerMesh.add(gltf.scene)
-                },
-                undefined,
-                function (error) {
-                    console.error(error);
-                },
-                );
-            // mesh = new THREE.Mesh(new THREE.playerModel(player.width, player.width, player.height), playerMaterial);
-            // model = new THREE.playerModel();
+            // const playerModel = new GLTFLoader;
+            // playerModel.load(
+            //     "../models/tank2.glb",
+            //     function (gltf) {
+            //         console.log(gltf.scene);
+            //         gltf.scene.scale.set(30, 30, 30);
+            //         playerMesh.add(gltf.scene)
+            //     },
+            //     undefined,
+            //     function (error) {
+            //         console.error(error);
+            //     },
+            //     );
+            mesh = new THREE.Mesh(new THREE.BoxGeometry(player.width, player.width, player.height), playerMaterial);
             // mesh = new THREE.Mesh(new this.model)
-            // mesh.castShadow = true;
-            // mesh.name = 'body';
-            // playerMesh.add(mesh);
+    		mesh.castShadow = true;
+    		mesh.name = 'body';
+    		playerMesh.add(mesh);
         }
 
         if (font) {
