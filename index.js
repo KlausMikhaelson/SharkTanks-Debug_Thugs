@@ -183,9 +183,9 @@ const wall5 = new Wall({
 walls[wall5.id] = wall5;
 
 
-
 const bot = new BotPlayer({ nickname: 'bot' });
 players[bot.id] = bot;
+
 
 
 io.on('connection', function (socket) {

@@ -62,6 +62,7 @@ function gameStart() {
     } else {
         socket.emit('game-start', { nickname: nickname });
         $("#start-screen").hide();
+        $("#canvas-3d").show();
     }
 }
 $("#start-button").on('click', gameStart);
