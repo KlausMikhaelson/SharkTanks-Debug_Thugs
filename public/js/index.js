@@ -103,7 +103,7 @@ socket.on('state', (players, bullets, walls) => {
     Object.values(players).forEach((player) => {
         let playerMesh = Meshes[player.id];
         if (!playerMesh) {
-            console.log('create player mesh');
+            // console.log('create player mesh');
             playerMesh = new THREE.Group();
             playerMesh.castShadow = true;
             Meshes[player.id] = playerMesh;
@@ -218,7 +218,7 @@ socket.on('state', (players, bullets, walls) => {
     Object.keys(Meshes).forEach((key) => {
         const mesh = Meshes[key];
         if (!mesh.used) {
-            console.log('removing mesh', key);
+            // console.log('removing mesh', key);
             scene.remove(mesh);
             mesh.traverse((mesh2) => {
                 if (mesh2.geometry) {

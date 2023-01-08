@@ -73,7 +73,8 @@ class Player extends GameObject {
     }
     shoot() {
         if (Object.keys(this.bullets).length >= 10) {
-            return console.log("reloading");
+            return;
+            // return console.log("reloading");
         }
         const bullet = new Bullet({
             x: this.x + this.width / 2,
