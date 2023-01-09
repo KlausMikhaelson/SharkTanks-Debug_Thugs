@@ -88,6 +88,9 @@ function gameStart() {
     }
 }
 
+// socket.on("playerName", (playersname) => {
+//     console.log(playersname)
+// })
 
 const btn = $(".close")[0];
 btn.onclick = function() {
@@ -143,7 +146,7 @@ socket.on("updatedUserlist", (users) => {
     userLists.innerText = "Active players:" + users;
 })
 
-var playerNames = [];
+// var playerNames = [];
 
 const Meshes = [];
 socket.on('state', (players, bullets, walls) => {
@@ -193,8 +196,8 @@ socket.on('state', (players, bullets, walls) => {
                         { font: font, size: 10, height: 1 }),
                     nicknameMaterial,
                 );
-                playerNames.push(player.nickname);
-                console.log(playerNames)
+                // playerNames.push(player.nickname);
+                // console.log(playerNames)
                 mesh.name = 'nickname';
                 playerMesh.add(mesh);
 

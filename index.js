@@ -187,7 +187,7 @@ walls[wall5.id] = wall5;
 const bot = new BotPlayer({ nickname: 'Karthick' });
 players[bot.id] = bot;
 
-
+var playerNames = [];
 io.on('connection', function (socket) {
     let player = null;
     const userList = io.engine.clientsCount
@@ -199,6 +199,8 @@ io.on('connection', function (socket) {
             nickname: config.nickname,
         });
         players[player.id] = player;
+        playerNames.push(config.nickname);
+        console.log(playerNames);
     });
     socket.on('movement', function (movement) {
         if (!player || player.health === 0) { return; }
