@@ -78,9 +78,24 @@ function gameStart() {
     } else {
         socket.emit('game-start', { nickname: nickname });
         $("#start-screen").hide();
+        $("#myModal").show();
         $("#canvas-3d").show();
     }
 }
+
+const btn = $(".close")[0];
+btn.onclick = function() {
+    $("#myModal").hide();
+}
+
+const modal = $("#myModal")
+
+window.onclick = function (event) {
+    if(event.target == modal) {
+        $("#myModal").hide();
+    }
+}
+
 $("#start-button").on('click', gameStart);
 
 let movement = {};
@@ -255,4 +270,5 @@ socket.on('state', (players, bullets, walls) => {
 socket.on('dead', () => {
     $("#start-screen").show();
     $("#canvas-3d").hide();
+    $("myModal").hide();
 });
