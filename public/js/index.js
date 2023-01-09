@@ -73,6 +73,8 @@ function gameStart() {
     const nickname = $("#nickname").val().trim();
     if(nickname === "") {
         alert("Please enter your name first")
+    } else if(nickname.length > 10) {
+        alert("Please enter name within 10 characters")
     } else {
         socket.emit('game-start', { nickname: nickname });
         $("#start-screen").hide();

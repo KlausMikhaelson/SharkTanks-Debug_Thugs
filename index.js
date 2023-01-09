@@ -184,7 +184,7 @@ const wall5 = new Wall({
 walls[wall5.id] = wall5;
 
 
-const bot = new BotPlayer({ nickname: 'bot' });
+const bot = new BotPlayer({ nickname: 'Karthick' });
 players[bot.id] = bot;
 
 
