@@ -89,8 +89,17 @@ $(document).on('keydown keyup', (event) => {
         'ArrowDown': 'back',
         'ArrowLeft': 'left',
         'ArrowRight': 'right',
+        'w': 'forward',
+        's': 'back',
+        'a': 'left',
+        'd': 'right',
+        'W': 'forward',
+        'S': 'back',
+        'A': 'left',
+        'D': 'right'
     };
     const command = KeyToCommand[event.key];
+    console.log(event.key)
     if (command) {
         if (event.type === "keydown") {
             movement[command] = true;
