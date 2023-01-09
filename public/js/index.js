@@ -108,7 +108,7 @@ $(document).on('keydown keyup', (event) => {
         }
         socket.emit('movement', movement);
     }
-    if (event.key === ' ' && event.type === "keydown") {
+    if ((event.key === ' ' || event.key === "x" || event.key === "X") && event.type === "keydown") {
         socket.emit('shoot');
         mySound.play();
     }
