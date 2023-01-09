@@ -72,7 +72,7 @@ class Player extends GameObject {
         } while (this.intersectWalls());
     }
     shoot() {
-        if (Object.keys(this.bullets).length >=5) {
+        if (Object.keys(this.bullets).length >= 5) {
             return;
             // return console.log("reloading");
         }
@@ -188,9 +188,11 @@ const bot = new BotPlayer({ nickname: 'Karthick' });
 players[bot.id] = bot;
 
 
-
 io.on('connection', function (socket) {
     let player = null;
+    const userList = io.engine.clientsCount
+    io.emit('updatedUserlist', userList)
+
     socket.on('game-start', (config) => {
         player = new Player({
             socketId: socket.id,
@@ -212,6 +214,13 @@ io.on('connection', function (socket) {
         player = null;
     });
 });
+
+// function getUserlist() {
+//     const userList = io.engine.clientsCount
+//     console.log(userList);
+// }
+
+
 
 setInterval(() => {
     Object.values(players).forEach((player) => {

@@ -116,7 +116,7 @@ $(document).on('keydown keyup', (event) => {
         'D': 'right'
     };
     const command = KeyToCommand[event.key];
-    console.log(event.key)
+    // console.log(event.key)
     if (command) {
         if (event.type === "keydown") {
             movement[command] = true;
@@ -129,6 +129,10 @@ $(document).on('keydown keyup', (event) => {
         socket.emit('shoot');
         mySound.play();
     }
+})
+
+socket.on("updatedUserlist", (users) => {
+    console.log(users);
 })
 
 
