@@ -133,6 +133,8 @@ $(document).on('keydown keyup', (event) => {
 
 socket.on("updatedUserlist", (users) => {
     console.log(users);
+    const userLists = document.getElementById("userList")
+    userLists.innerText = "No. of players:" + users;
 })
 
 
