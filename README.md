@@ -33,3 +33,18 @@ _There are several evolutionary changes for SharkTank that we have staged. _
 - Thirdly, security aspects can be implemented and also improved
 - Separate user accounts can be assigned so that they can keep track of their achievements and develop their ability accordingly.
 - Environments can be change and many more to come.....
+
+## Creators
+<table>
+  <tbody>
+    <tr>
+      <td align="center"><a href="https://github.com/KlausMikhaelson"><img src="https://avatars.githubusercontent.com/u/100528412?v=4" width="100px;" alt="Klaus"/><br /><sub><b>Klaus(Satyam)</b></sub></a><br /><a href="https://sharktanks.tech" title="Code">💻</a></td>
+            <td align="center"><a href="https://github.com/OmDalwadi"><img src="https://avatars.githubusercontent.com/u/88398870?v=4" width="100px;" alt="Om"/><br /><sub><b>Om Dalwadi</b></sub></a><br /><a href="https://sharktanks.tech" title="Code and docs">💻 🖋</a></td>
+                  <td align="center"><a href="https://github.com/kartikpatel0170"><img src="https://avatars.githubusercontent.com/u/67594421?v=4" width="100px;" alt="Karthick"/><br /><sub><b>Kartik Patel</b></sub></a><br /><a href="https://sharktanks.tech" title="Code">💻</a></td>
+                        <td align="center"><a href="https://github.com/zachary-huber"><img src="https://avatars.githubusercontent.com/u/23299345?v=4" width="100px;" alt="GigaChad"/><br /><sub><b>Zac</b></sub></a><br /><a href="https://sharktanks.tech" title="3d design + guidance"> 🎨 🖋</a></td>
+    </tr>
+  </tbody>
+</table>
+
+
+
