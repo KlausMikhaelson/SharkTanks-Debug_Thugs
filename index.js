@@ -72,7 +72,7 @@ class Player extends GameObject {
         } while (this.intersectWalls());
     }
     shoot() {
-        if (Object.keys(this.bullets).length >= 10) {
+        if (Object.keys(this.bullets).length >=5) {
             return;
             // return console.log("reloading");
         }
