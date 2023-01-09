@@ -80,8 +80,14 @@ function gameStart() {
         $("#start-screen").hide();
         $("#myModal").show();
         $("#canvas-3d").show();
+        // console.log(playerName);
+        // const stats = document.getElementById("nameOfplayers")
+        // const nameOfplayer = document.createElement("p")
+        // nameOfplayer.innerHTML = nickname + " just joined the game"
+        // stats.append(nameOfplayer)
     }
 }
+
 
 const btn = $(".close")[0];
 btn.onclick = function() {
@@ -137,7 +143,7 @@ socket.on("updatedUserlist", (users) => {
     userLists.innerText = "Active players:" + users;
 })
 
-
+var playerNames = [];
 
 const Meshes = [];
 socket.on('state', (players, bullets, walls) => {
@@ -156,7 +162,7 @@ socket.on('state', (players, bullets, walls) => {
         playerMesh.used = true;
         playerMesh.position.set(player.x + player.width / 2, player.width / 2, player.y + player.height / 2);
         playerMesh.rotation.y = - player.angle;
-
+        
         if (!playerMesh.getObjectByName('body')) {
             console.log('create body mesh');
             // const playerModel = new GLTFLoader;
@@ -178,6 +184,7 @@ socket.on('state', (players, bullets, walls) => {
     		mesh.name = 'body';
     		playerMesh.add(mesh);
         }
+        
 
         if (font) {
             if (!playerMesh.getObjectByName('nickname')) {
@@ -186,6 +193,8 @@ socket.on('state', (players, bullets, walls) => {
                         { font: font, size: 10, height: 1 }),
                     nicknameMaterial,
                 );
+                playerNames.push(player.nickname);
+                console.log(playerNames)
                 mesh.name = 'nickname';
                 playerMesh.add(mesh);
 
