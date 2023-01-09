@@ -90,8 +90,8 @@ class Player extends GameObject {
         this.health--;
         if (this.health === 0) {
             this.remove();
-            const newarr = playerNames.filter(item => item !== this.nickname) 
-            console.log(newarr);
+            const updatedPlayernames = this.nickname 
+            io.emit('updatedPlayerList', updatedPlayernames);
         }
     }
     remove() {
@@ -202,7 +202,9 @@ io.on('connection', function (socket) {
         });
         players[player.id] = player;
         playerNames.push(config.nickname);
-        console.log(playerNames);
+        const playerNameslatest = playerNames.slice(-1)
+        console.log(playerNameslatest);
+        io.emit("joiningList", playerNameslatest)
     });
     socket.on('movement', function (movement) {
         if (!player || player.health === 0) { return; }

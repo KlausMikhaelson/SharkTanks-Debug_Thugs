@@ -88,9 +88,20 @@ function gameStart() {
     }
 }
 
-// socket.on("playerName", (playersname) => {
-//     console.log(playersname)
-// })
+socket.on("joiningList", (joinList) => {
+    const stats = document.getElementById("nameOfplayers")
+    const nameOfplayer = document.createElement("p")
+    nameOfplayer.innerHTML = joinList + " joined the game"
+    stats.append(nameOfplayer)
+})
+
+socket.on("updatedPlayerList", (updatedPlayers) => {
+    console.log(updatedPlayers)
+    const stats = document.getElementById("nameOfplayers")
+    const nameOfplayer = document.createElement("p")
+    nameOfplayer.innerHTML = updatedPlayers + " died"
+    stats.append(nameOfplayer)
+})
 
 const btn = $(".close")[0];
 btn.onclick = function() {
