@@ -90,6 +90,8 @@ class Player extends GameObject {
         this.health--;
         if (this.health === 0) {
             this.remove();
+            const newarr = playerNames.filter(item => item !== this.nickname) 
+            console.log(newarr);
         }
     }
     remove() {
