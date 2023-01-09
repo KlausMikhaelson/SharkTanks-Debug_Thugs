@@ -63,8 +63,10 @@ const texture = loader_map.load([
 scene.background = texture;
 
 function animate() {
-    requestAnimationFrame(animate)
-    renderer.render(scene, camera);
+    setTimeout(function() {
+        requestAnimationFrame(animate)
+        renderer.render(scene, camera);
+    }, 1000/20)
 }
 
 animate();
