@@ -296,6 +296,9 @@ socket.on('state', (players, bullets, walls) => {
     });
 });
 
+
+const msgbar = document.getElementById("userList")
+msgbar.scrollTop = msgbar.scrollHeight;
 socket.on('dead', () => {
     $("#start-screen").show();
     $("#canvas-3d").hide();

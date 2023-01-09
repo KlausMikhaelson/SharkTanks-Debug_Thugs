@@ -1,4 +1,5 @@
 <html>
+
 <head>
   <title>BattleGround Warriors</title>
   <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -10,9 +11,9 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-HNNCVKWF1D"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-  
+
     gtag('config', 'G-HNNCVKWF1D');
   </script>
 </head>
@@ -32,8 +33,9 @@
 
 
         <p class="name">
-          <input name="nickname" required autofocus type="text" class="validate[required,custom[onlyLetter],length[0,100]] feedback-input"
-            placeholder="Your Username" id="nickname" />
+          <input name="nickname" required autofocus type="text"
+            class="validate[required,custom[onlyLetter],length[0,100]] feedback-input" placeholder="Your Username"
+            id="nickname" />
         </p>
 
         <div class="submit">
@@ -53,19 +55,21 @@
     <span class="close">&times;</span>
     <div style="text-align: center;">
       <p>Welcome to SharkTanks !</p>
-      <p>A place where inorder to play the game with your friends online you don't have to download anything neither you need any sort of nitro subscription !</p>
+      <p>A place where inorder to play the game with your friends online you don't have to download anything neither you
+        need any sort of nitro subscription !</p>
       <p>Join the battle, forge your destiny</p>
-      <p>since it's a 3D multiplayer game so give it a while to load and we are just using free tier server so it might lag a bit if there are many players in the game</p>
+      <p>since it's a 3D multiplayer game so give it a while to load and we are just using free tier server so it might
+        lag a bit if there are many players in the game</p>
     </div>
   </div>
 </div>
 <div id="userList">
 </div>
 <div id="nameOfplayers">
-  Yoooo
+  Latest News
 </div>
-  <canvas id="canvas-3d" width="1000" height="1000"
-    style="display: none;position: absolute; width: 100%; height: 100vh; z-index:0;"></canvas>
+<canvas id="canvas-3d" width="1000" height="1000"
+  style="display: none;position: absolute; width: 100%; height: 100vh; z-index:0;"></canvas>
 
 </body>
 <script src="js/index.js" type="module"></script>
