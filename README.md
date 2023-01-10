@@ -1,5 +1,7 @@
 ## Project Name
-SharkTanks - Join the battle, forge your destiny.
+### SharkTanks - Join the battle, forge your destiny.
+
+### If you're here than do consider giving this repo a star !
 
 ## Inspiration
 We were inspired to build an online multiplayer game because we all have always been a fan of video games and the idea of being able to play with others from across the world and it really excites us. 
