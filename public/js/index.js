@@ -19,6 +19,10 @@ audioLoader.load("../assets/firing2.mp3", function(buffer) {
     mySound.setVolume(0.5)
 })
 
+window.onload = function() {
+    $("#preloader").hide();
+}
+
 const textureLoader = new THREE.TextureLoader();
 const playerTexture2 = textureLoader.load("../assets/tank2.png")
 const playerTexture = textureLoader.load("../assets/front.jpg")
