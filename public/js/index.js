@@ -248,12 +248,27 @@ socket.on('state', (players, bullets, walls) => {
 
         if (player.socketId === socket.id) {
             // camera position
+            console.log(player.point)
+            $("#score")[0].innerText = "Your Score: " + player.point;
+
+
+            // this.context2D_.canvas.fillText(player.point, 128, 64)
+
+
+
             camera.position.set(
                 player.x + player.width / 2 - 150 * Math.cos(player.angle),
                 200,
                 player.y + player.height / 2 - 150 * Math.sin(player.angle)
             );
             camera.rotation.set(0, - player.angle - Math.PI / 2, 0);
+            // if(player.socketId === socket.id){
+            //     context.save();
+            //     context.font = '30px Bold Arial';
+            //     context.fillText('You', player.x, player.y - 20);
+            //     context.fillText(player.point + ' point', 20, 40);
+            //     context.restore();
+            // }
 
         }
     });
