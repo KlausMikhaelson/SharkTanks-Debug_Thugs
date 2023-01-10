@@ -124,7 +124,7 @@ class BotPlayer extends Player {
             if (Math.random() < 0.03) {
                 this.shoot();
             }
-        }, 1000 / 30);
+        }, 1000 / 20);
     }
     remove() {
         super.remove();
@@ -260,7 +260,7 @@ setInterval(() => {
         });
     });
     io.sockets.emit('state', players, bullets, walls);
-}, 1000 / 30);
+}, 1000 / 20);
 
 
 app.use(express.static("public"));
