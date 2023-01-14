@@ -255,7 +255,7 @@ setInterval(() => {
                     player.damage();
                     bullet.remove();
                     bullet.player.point += 1;
-                    if(bullet.player.point === 20) {
+                    if(bullet.player.point === 20 || bullet.player.point === 50 || bullet.player.point === 100) {
                         console.log("20 yay")
                         bullet.player.health = this.maxHealth = 10;
                     }
