@@ -263,7 +263,7 @@ setInterval(() => {
             }
         });
     });
-    io.sockets.emit('state', players, bullets, walls);
+    io.sockets.emit('state', players, bullets);
 }, 1000 / 20);
 
 

@@ -14,12 +14,12 @@ camera.add(listener);
 const audioLoader = new THREE.AudioLoader();
 
 const mySound = new THREE.Audio(listener);
-audioLoader.load("../assets/firing2.mp3", function(buffer) {
+audioLoader.load("../assets/firing2.mp3", function (buffer) {
     mySound.setBuffer(buffer)
     mySound.setVolume(0.5)
 })
 
-window.onload = function() {
+window.onload = function () {
     $("#preloader").hide();
 }
 
@@ -38,12 +38,12 @@ const bulletTexture = textureLoader.load("../assets/bullets.jpg")
 const bulletMaterial = new THREE.MeshLambertMaterial({ map: bulletTexture });
 const wallMaterial = new THREE.MeshLambertMaterial({ map: wallTexture });
 const playerMaterial = [
-    new THREE.MeshLambertMaterial({map: playerTexture1, color: 0x404040}),
-    new THREE.MeshLambertMaterial({map: playerTexture5, color: 0x404040}),
-    new THREE.MeshLambertMaterial({map: playerTexture2}),
-    new THREE.MeshLambertMaterial({map: playerTexture, color: 0x404040}),
-    new THREE.MeshLambertMaterial({map: playerTexture3, color: 0x404040}),
-    new THREE.MeshLambertMaterial({map: playerTexture4, color: 0x404040}),
+    new THREE.MeshLambertMaterial({ map: playerTexture1, color: 0x404040 }),
+    new THREE.MeshLambertMaterial({ map: playerTexture5, color: 0x404040 }),
+    new THREE.MeshLambertMaterial({ map: playerTexture2 }),
+    new THREE.MeshLambertMaterial({ map: playerTexture, color: 0x404040 }),
+    new THREE.MeshLambertMaterial({ map: playerTexture3, color: 0x404040 }),
+    new THREE.MeshLambertMaterial({ map: playerTexture4, color: 0x404040 }),
 ]
 const textMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000, side: THREE.DoubleSide });
 const nicknameMaterial = new THREE.MeshBasicMaterial({ color: 'black', side: THREE.DoubleSide });
@@ -67,19 +67,19 @@ const texture = loader_map.load([
 scene.background = texture;
 
 function animate() {
-    setTimeout(function() {
+    setTimeout(function () {
         requestAnimationFrame(animate)
         renderer.render(scene, camera);
-    }, 1000/20)
+    }, 1000 / 20)
 }
 
 animate();
 
 function gameStart() {
     const nickname = $("#nickname").val().trim();
-    if(nickname === "") {
+    if (nickname === "") {
         alert("Please enter your name first")
-    } else if(nickname.length > 10) {
+    } else if (nickname.length > 10) {
         alert("Please enter name within 10 characters")
     } else {
         socket.emit('game-start', { nickname: nickname });
@@ -110,14 +110,14 @@ socket.on("updatedPlayerList", (updatedPlayers) => {
 })
 
 const btn = $(".close")[0];
-btn.onclick = function() {
+btn.onclick = function () {
     $("#myModal").hide();
 }
 
 const modal = $("#myModal")
 
 window.onclick = function (event) {
-    if(event.target == modal) {
+    if (event.target == modal) {
         $("#myModal").hide();
     }
 }
@@ -182,7 +182,7 @@ socket.on('state', (players, bullets, walls) => {
         playerMesh.used = true;
         playerMesh.position.set(player.x + player.width / 2, player.width / 2, player.y + player.height / 2);
         playerMesh.rotation.y = - player.angle;
-        
+
         if (!playerMesh.getObjectByName('body')) {
             console.log('create body mesh');
             // const playerModel = new GLTFLoader;
@@ -200,11 +200,11 @@ socket.on('state', (players, bullets, walls) => {
             //     );
             mesh = new THREE.Mesh(new THREE.BoxGeometry(player.width, player.width, player.height), playerMaterial);
             // mesh = new THREE.Mesh(new this.model)
-    		mesh.castShadow = true;
-    		mesh.name = 'body';
-    		playerMesh.add(mesh);
+            mesh.castShadow = true;
+            mesh.name = 'body';
+            playerMesh.add(mesh);
         }
-        
+
 
         if (font) {
             if (!playerMesh.getObjectByName('nickname')) {
@@ -288,18 +288,37 @@ socket.on('state', (players, bullets, walls) => {
     });
 
     // Walls
-    Object.values(walls).forEach((wall) => {
-        let mesh = Meshes[wall.id];
-        if (!mesh) {
-            mesh = new THREE.Mesh(new THREE.BoxGeometry(wall.width, 200, 1000), wallMaterial);
-            mesh.castShadow = true;
-            Meshes.push(mesh);
-            Meshes[wall.id] = mesh;
-            scene.add(mesh);
-        }
-        mesh.used = true;
-        mesh.position.set(wall.x + wall.width / 2, 50, wall.y + wall.height / 2);
-    });
+    // Object.values(walls).forEach((wall) => {
+    //     let mesh = Meshes[wall.id];
+    //     if (!mesh) {
+    //         mesh = new THREE.Mesh(new THREE.BoxGeometry(wall.width, 200, 1000), wallMaterial);
+    //         mesh.castShadow = true;
+    //         Meshes.push(mesh);
+    //         Meshes[wall.id] = mesh;
+    //         scene.add(mesh);
+    //     }
+    //     mesh.used = true;
+    //     mesh.position.set(wall.x + wall.width / 2, 50, wall.y + wall.height / 2);
+    // });
+
+    let mesh = Meshes[Math.floor(Math.random() * 10000)]
+    mesh = new THREE.Mesh(new THREE.BoxGeometry(200, 200, 1000), wallMaterial);
+    mesh.castShadow = true;
+    Meshes.push(mesh);
+    Meshes[Math.floor(Math.random() * 10000)] = mesh;
+    scene.add(mesh);
+    mesh.used = true;
+    mesh.position.set(200 / 2, 50, 2 + 1000 / 2);
+
+    let mesh2 = Meshes[Math.floor(Math.random() * 10000)]
+    mesh2 = new THREE.Mesh(new THREE.BoxGeometry(200, 200, 1000), wallMaterial);
+    mesh2.castShadow = true;
+    Meshes.push(mesh2);
+    Meshes[Math.floor(Math.random() * 10000)] = mesh2;
+    scene.add(mesh2);
+    mesh2.used = true;
+    mesh2.position.set(1000 + 200 / 2, 50, 100 + 1000 / 2);
+
 
     // Clear unused Meshes
     Object.keys(Meshes).forEach((key) => {
