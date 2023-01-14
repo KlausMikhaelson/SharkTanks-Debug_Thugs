@@ -319,6 +319,36 @@ socket.on('state', (players, bullets, walls) => {
     mesh2.used = true;
     mesh2.position.set(1000 + 200 / 2, 50, 100 + 1000 / 2);
 
+    let mesh3 = Meshes[Math.floor(Math.random() * 10000)]
+    mesh3 = new THREE.Mesh(new THREE.BoxGeometry(200, 200, 1000), wallMaterial);
+    mesh3.castShadow = true;
+    Meshes.push(mesh3);
+    Meshes[Math.floor(Math.random() * 10000)] = mesh3;
+    scene.add(mesh3);
+    mesh3.used = true;
+    mesh3.position.set(2000 + 200 / 2, 50, 1000 + 1000 / 2);
+
+// gotta check it
+    let mesh4 = Meshes[Math.floor(Math.random() * 10000)]
+    mesh4 = new THREE.Mesh(new THREE.BoxGeometry(200, 200, 1000), wallMaterial);
+    mesh4.castShadow = true;
+    Meshes.push(mesh4);
+    Meshes[Math.floor(Math.random() * 10000)] = mesh4;
+    scene.add(mesh4);
+    mesh4.used = true;
+    mesh4.position.set(-1000 + 200 / 2, 50, -1000 + 1000 / 2);
+
+    let mesh6 = Meshes[Math.floor(Math.random() * 10000)]
+    mesh6 = new THREE.Mesh(new THREE.BoxGeometry(200, 200, 1000), wallMaterial);
+    mesh6.castShadow = true;
+    Meshes.push(mesh6);
+    Meshes[Math.floor(Math.random() * 10000)] = mesh6;
+    scene.add(mesh6);
+    mesh6.used = true;
+    mesh6.position.set(-1500 + 200 / 2, 50, 700 + 1000 / 2);
+
+
+
 
     // Clear unused Meshes
     Object.keys(Meshes).forEach((key) => {
