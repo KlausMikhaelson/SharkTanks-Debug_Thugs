@@ -126,13 +126,13 @@ $("#start-button").on('click', gameStart);
 
 let movement = {};
 
-$("#right").on('mouseover mouseout', (touch) => { 
+$("#right").on('touchstart touchend', (touch) => { 
     const command = 'right'
     if (command) {
-        if (touch.type === "mouseover") {
+        if (touch.type === "touchstart") {
             movement[command] = true;
             console.log(command)
-        } else {
+        } else if(touch.type === "touchend"){
             movement[command] = false;
         }
         socket.emit('movement', movement);
@@ -152,34 +152,34 @@ $("#left").on('touchstart touchend', (touch) => {
     }
 })
 
-$("#forward").on('mouseover mouseout', (touch) => { 
+$("#forward").on('touchstart touchend', (touch) => { 
     const command = 'forward'
     if (command) {
-        if (touch.type === "mouseover") {
+        if (touch.type === "touchstart") {
             movement[command] = true;
             console.log(command)
-        } else {
+        } else if(touch.type === "touchend"){
             movement[command] = false;
         }
         socket.emit('movement', movement);
     }
 })
 
-$("#backward").on('mouseover mouseout', (touch) => { 
+$("#backward").on('touchstart touchend', (touch) => { 
     const command = 'back'
     if (command) {
-        if (touch.type === "mouseover") {
+        if (touch.type === "touchstart") {
             movement[command] = true;
             console.log(command)
-        } else {
+        } else if(touch.type === "touchend"){
             movement[command] = false;
         }
         socket.emit('movement', movement);
     }
 })
-$("#shoot").on('mouseover mouseout', (touch) => { 
+$("#shoot").on('touchstart touchend', (touch) => { 
     // const command = 'left'
-    if (touch.type === 'mouseover') {
+    if (touch.type === 'touchstart') {
         socket.emit('shoot');
         mySound.play();
     }
