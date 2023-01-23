@@ -126,7 +126,33 @@ $("#start-button").on('click', gameStart);
 
 let movement = {};
 
-$("#controller").on('mouseover mouseout', (touch) => { 
+$("#right").on('mouseover mouseout', (touch) => { 
+    const command = 'right'
+    if (command) {
+        if (touch.type === "mouseover") {
+            movement[command] = true;
+            console.log(command)
+        } else {
+            movement[command] = false;
+        }
+        socket.emit('movement', movement);
+    }
+})
+
+$("#left").on('mouseover mouseout', (touch) => { 
+    const command = 'left'
+    if (command) {
+        if (touch.type === "mouseover") {
+            movement[command] = true;
+            console.log(command)
+        } else {
+            movement[command] = false;
+        }
+        socket.emit('movement', movement);
+    }
+})
+
+$("#forward").on('mouseover mouseout', (touch) => { 
     const command = 'forward'
     if (command) {
         if (touch.type === "mouseover") {
@@ -138,6 +164,22 @@ $("#controller").on('mouseover mouseout', (touch) => {
         socket.emit('movement', movement);
     }
 })
+
+$("#backward").on('mouseover mouseout', (touch) => { 
+    const command = 'back'
+    if (command) {
+        if (touch.type === "mouseover") {
+            movement[command] = true;
+            console.log(command)
+        } else {
+            movement[command] = false;
+        }
+        socket.emit('movement', movement);
+    }
+})
+
+
+
 
 $(document).on('keydown keyup', (event) => {
     const KeyToCommand = {
