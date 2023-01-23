@@ -177,6 +177,13 @@ $("#backward").on('mouseover mouseout', (touch) => {
         socket.emit('movement', movement);
     }
 })
+$("#shoot").on('mouseover mouseout', (touch) => { 
+    // const command = 'left'
+    if (touch.type === 'mouseover') {
+        socket.emit('shoot');
+        mySound.play();
+    }
+})
 
 
 
