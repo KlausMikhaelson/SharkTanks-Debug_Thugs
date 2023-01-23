@@ -126,6 +126,19 @@ $("#start-button").on('click', gameStart);
 
 let movement = {};
 
+$("#controller").on('mouseover mouseout', (touch) => { 
+    const command = 'forward'
+    if (command) {
+        if (touch.type === "mouseover") {
+            movement[command] = true;
+            console.log(command)
+        } else {
+            movement[command] = false;
+        }
+        socket.emit('movement', movement);
+    }
+})
+
 $(document).on('keydown keyup', (event) => {
     const KeyToCommand = {
         'ArrowUp': 'forward',
