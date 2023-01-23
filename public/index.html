@@ -3,7 +3,10 @@
 <head>
   <title>BattleGround Warriors</title>
   <meta property="og:title" content="SharkTanks, Join the battle, forge your destiny." />
-  <meta property="og:img" content="https://user-images.githubusercontent.com/100528412/211655305-1d506e9e-fcb5-4edf-bf73-aaf08195d3cf.png" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <meta property="og:img"
+    content="https://user-images.githubusercontent.com/100528412/211655305-1d506e9e-fcb5-4edf-bf73-aaf08195d3cf.png" />
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <script src="/socket.io/socket.io.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -73,12 +76,21 @@
 </div>
 <div id="score">
 </div>
-<div id="controller" style="align-items: center; justify-content: center; display: grid; grid-template-columns: 25% 25% 25% 25%;">
-  <button id="left"><img src="./assets/left.png" alt="left"></button>
-  <button id="forward"><img src="./assets/up.png" alt="forward"></button>
-  <button id="right"><img src="./assets/right.png" alt="right"></button>
+<div id="controller"
+  style="align-items: center; justify-content: center; display: grid; grid-template-columns: 25% 25% 25% 25%;">
+  <button id="left"><span class="material-symbols-outlined">
+      arrow_back
+    </span></button>
+  <button id="forward"><span class="material-symbols-outlined">
+      north
+    </span></button>
+  <button id="right"><span class="material-symbols-outlined">
+      arrow_forward
+    </span></button>
   <br>
-  <button style="margin-left: 140px;" id="backward"><img src="./assets/down.png" alt="backward"></button>
+  <button style="margin-left: 140px;" id="backward"><span class="material-symbols-outlined">
+      arrow_downward
+    </span></button>
   <br>
   <button id="shoot"><img src="./assets/fire.png" alt="fire"></button>
 </div>
