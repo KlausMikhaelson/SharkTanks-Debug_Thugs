@@ -208,6 +208,16 @@ input:focus, textarea:focus {
 	border: 0px;
 }
 
+@media (min-width: 1200px) {
+	#controller {
+		display: none;
+	}
+	#controller button {
+		display: none;
+	}
+
+}
+
 #controller img {
 	opacity: 0.3;
 	margin: 5px;
