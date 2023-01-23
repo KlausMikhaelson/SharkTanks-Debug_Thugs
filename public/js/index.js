@@ -139,13 +139,13 @@ $("#right").on('mouseover mouseout', (touch) => {
     }
 })
 
-$("#left").on('mouseover mouseout', (touch) => { 
+$("#left").on('touchstart touchend', (touch) => { 
     const command = 'left'
     if (command) {
-        if (touch.type === "mouseover") {
+        if (touch.type === 'touchstart') {
             movement[command] = true;
             console.log(command)
-        } else {
+        } else if(touch.type === 'touchend'){
             movement[command] = false;
         }
         socket.emit('movement', movement);

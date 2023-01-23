@@ -208,7 +208,7 @@ input:focus, textarea:focus {
 	border: 0px;
 }
 
-@media (min-width: 1200px) {
+/* @media (min-width: 1200px) {
 	#controller {
 		display: none;
 	}
@@ -216,7 +216,7 @@ input:focus, textarea:focus {
 		display: none;
 	}
 
-}
+} */
 
 #controller img {
 	opacity: 0.3;
