@@ -243,6 +243,9 @@ input:focus, textarea:focus {
 	#controller button {
 		display: none;
 	}
+	#shooting {
+		display: none;
+	}
 
 }
 
