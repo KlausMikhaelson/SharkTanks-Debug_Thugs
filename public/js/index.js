@@ -16,7 +16,13 @@ const audioLoader = new THREE.AudioLoader();
 const mySound = new THREE.Audio(listener);
 audioLoader.load("../assets/firing2.mp3", function (buffer) {
     mySound.setBuffer(buffer)
-    mySound.setVolume(0.5)
+    mySound.setVolume(0.4)
+})
+
+const backMusic = new THREE.Audio(listener)
+audioLoader.load("../assets/background.mp3", function (buffer) {
+    backMusic.setBuffer(buffer)
+    backMusic.setVolume(0.2)
 })
 
 window.onload = function () {
@@ -86,6 +92,7 @@ function gameStart() {
         $("#start-screen").hide();
         $("#myModal").show();
         $("#canvas-3d").show();
+        backMusic.play();
         // console.log(playerName);
         // const stats = document.getElementById("nameOfplayers")
         // const nameOfplayer = document.createElement("p")
