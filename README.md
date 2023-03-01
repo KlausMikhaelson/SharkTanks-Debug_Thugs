@@ -1,6 +1,8 @@
 ## Project Name
 ### SharkTanks - Join the battle, forge your destiny.
 
+### Since it's open sourced so feel free to create issues to add features or fix bugs
+
 ### If you're here than do consider giving this repo a star !
 
 ## Inspiration
