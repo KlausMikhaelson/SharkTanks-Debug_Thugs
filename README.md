@@ -15,7 +15,7 @@ Click [here](https://sharktanks.tech/) to play the game!
 We used the following technologies to build the game:
 
 - HTML and CSS for the landing page
-- Three.js, Express.js and Node.js for the game environment and all other controls
+- Three.js, Express.js and Node.js for the game environment and the backend
 - Railway.app for hosting
 - Socket.io as a client-server interaction tool
 
