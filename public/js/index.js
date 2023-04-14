@@ -51,7 +51,7 @@ const playerMaterial = [
     new THREE.MeshLambertMaterial({ map: playerTexture3, color: 0x404040 }),
     new THREE.MeshLambertMaterial({ map: playerTexture4, color: 0x404040 }),
 ]
-const textMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000, side: THREE.DoubleSide });
+const textMaterial = new THREE.MeshBasicMaterial({ color: 0x85bb65, side: THREE.DoubleSide });
 const nicknameMaterial = new THREE.MeshBasicMaterial({ color: 'black', side: THREE.DoubleSide });
 
 
@@ -90,9 +90,13 @@ function gameStart() {
     } else {
         socket.emit('game-start', { nickname: nickname });
         $("#start-screen").hide();
-        $("#myModal").show();
+        if (localStorage.getItem("nickname") === null) {
+            $("#myModal").show();
+        }
         $("#canvas-3d").show();
+        const tryingsomething = localStorage.setItem("nickname", nickname)
         backMusic.play();
+
         // console.log(playerName);
         // const stats = document.getElementById("nameOfplayers")
         // const nameOfplayer = document.createElement("p")
@@ -133,58 +137,58 @@ $("#start-button").on('click', gameStart);
 
 let movement = {};
 
-$("#right").on('touchstart touchend', (touch) => { 
+$("#right").on('touchstart touchend', (touch) => {
     const command = 'right'
     if (command) {
         if (touch.type === "touchstart") {
             movement[command] = true;
-            console.log(command)
-        } else if(touch.type === "touchend"){
+            // console.log(command)
+        } else if (touch.type === "touchend") {
             movement[command] = false;
         }
         socket.emit('movement', movement);
     }
 })
 
-$("#left").on('touchstart touchend', (touch) => { 
+$("#left").on('touchstart touchend', (touch) => {
     const command = 'left'
     if (command) {
         if (touch.type === 'touchstart') {
             movement[command] = true;
-            console.log(command)
-        } else if(touch.type === 'touchend'){
+            // console.log(command)
+        } else if (touch.type === 'touchend') {
             movement[command] = false;
         }
         socket.emit('movement', movement);
     }
 })
 
-$("#forward").on('touchstart touchend', (touch) => { 
+$("#forward").on('touchstart touchend', (touch) => {
     const command = 'forward'
     if (command) {
         if (touch.type === "touchstart") {
             movement[command] = true;
-            console.log(command)
-        } else if(touch.type === "touchend"){
+            // console.log(command)
+        } else if (touch.type === "touchend") {
             movement[command] = false;
         }
         socket.emit('movement', movement);
     }
 })
 
-$("#backward").on('touchstart touchend', (touch) => { 
+$("#backward").on('touchstart touchend', (touch) => {
     const command = 'back'
     if (command) {
         if (touch.type === "touchstart") {
             movement[command] = true;
-            console.log(command)
-        } else if(touch.type === "touchend"){
+            // console.log(command)
+        } else if (touch.type === "touchend") {
             movement[command] = false;
         }
         socket.emit('movement', movement);
     }
 })
-$("#shoot").on('touchstart touchend', (touch) => { 
+$("#shoot").on('touchstart touchend', (touch) => {
     // const command = 'left'
     if (touch.type === 'touchstart') {
         socket.emit('shoot');
@@ -253,7 +257,7 @@ socket.on('state', (players, bullets, walls) => {
         playerMesh.rotation.y = - player.angle;
 
         if (!playerMesh.getObjectByName('body')) {
-            console.log('create body mesh');
+            // console.log('create body mesh');
             // const playerModel = new GLTFLoader;
             // playerModel.load(
             //     "../models/tank2.glb",
@@ -299,9 +303,9 @@ socket.on('state', (players, bullets, walls) => {
                     mesh = null;
                 }
                 if (!mesh) {
-                    console.log('create health mesh');
+                    // console.log('create health mesh');
                     mesh = new THREE.Mesh(
-                        new THREE.TextGeometry('|'.repeat(player.health),
+                        new THREE.TextGeometry('$'.repeat(player.health),
                             { font: font, size: 10, height: 2 }),
                         textMaterial,
                     );
@@ -317,7 +321,7 @@ socket.on('state', (players, bullets, walls) => {
 
         if (player.socketId === socket.id) {
             // camera position
-            console.log(player.point)
+            // console.log(player.point)
             $("#score")[0].innerText = "Your Score: " + player.point;
 
 
@@ -397,7 +401,7 @@ socket.on('state', (players, bullets, walls) => {
     mesh3.used = true;
     mesh3.position.set(2000 + 200 / 2, 50, 1000 + 1000 / 2);
 
-// gotta check it
+    // gotta check it
     let mesh4 = Meshes[Math.floor(Math.random() * 10000)]
     mesh4 = new THREE.Mesh(new THREE.BoxGeometry(200, 200, 1000), wallMaterial);
     mesh4.castShadow = true;
