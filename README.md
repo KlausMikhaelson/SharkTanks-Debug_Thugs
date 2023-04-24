@@ -47,6 +47,19 @@ To run this project locally, follow these steps:
 5. Run the command `node server.js`.
 6. Run the `public/index.html` in browser.
 
+
+## To deploy this project using Docker, follow these steps:
+
+1. Clone this repository to your local machine: `git clone https://github.com/KlausMikhaelson/SharkTanks-Debug_Thugs.git`
+2. Change into the project directory: `cd SharkTanks-Debug_Thugs`
+3. Build the Docker image: `docker build -t sharktank .`
+4. Start the Docker container: `docker run -d -p 3001:3001 sharktank`
+5. Your project should now be up and running, accessible at http://localhost:3001 in your web browser.
+
+### Notes
+1. Make sure that [Docker](https://www.docker.com/) is installed and running on your machine before attempting to deploy this project with Docker.
+2. This project's Dockerfile assumes that all dependencies are included in the project directory. If you need to install additional dependencies, update the Dockerfile accordingly before building the Docker image.
+
 ## Contributing
 
 To contribute to SharkTanks, follow these steps:
