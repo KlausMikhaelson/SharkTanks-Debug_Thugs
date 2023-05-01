@@ -17,7 +17,7 @@ We used the following technologies to build the game:
 - HTML and CSS for the landing page
 - Three.js, Express.js and Node.js for the game environment and the backend
 - Railway.app for hosting
-- Socket.io as a client-server interaction tool
+- Socket.io for the real time communication between the players and the server
 
 ### Challenges Faced
 We encountered a few challenges while building the game. Some of them are listed below:
