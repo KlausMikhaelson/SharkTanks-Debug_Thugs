@@ -1,5 +1,7 @@
 ## SharkTanks - Join the battle, forge your destiny.
 
+## SharkTanks is not live anymore we ran out of free credits hehe
+
 Welcome to SharkTanks! It is an online multiplayer game that allows multiple players to play together over the internet with each other. Even if there is no one around to play, we have implemented a bot that can work as an additional player. This game is open-sourced, so feel free to create issues to add features or fix bugs. If you find the project interesting, please consider giving it a star!
 
 ### Inspiration
